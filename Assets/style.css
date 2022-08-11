@@ -84,6 +84,6 @@ body.wrong {
   align-items: center;
 }
 
-.hidden {
-  /* display: none; */
+.hide {
+  display: none;
 }

@@ -1,96 +1,84 @@
-var startButton = document.querySelector("#start-button")
+var startButton = document.getElementById("start-button");
+var questionContainerElement = document.getElementById("question-container");
 
-function startGame();
+startButton.addEventListener("click", startGame);
 
+function startGame() {
+  console.log("Started");
+  startButton.classList.add("hide");
+  questionContainerElement.classList.remove("hide");
+  setNextQuestion();
+  {
+    console.log(next);
+  }
+}
 
+function nextQuestion() {}
 
-function nextQuestion ();
+function selectAnswer() {}
 
+var questions = [
+  {
+    question:
+      "1) Which of the following functions of an Array object joins all elements of an array into a string?",
+    answers: [
+      { text: "concat()", correct: false },
+      { text: "join()", correct: true },
+      { text: "pop()", correct: false },
+      { text: "map()", correct: false },
+    ],
+  },
+  {
+    question: "2)The function and var are known as:",
+    answers: [
+      { text: "Keywords", correct: false },
+      { text: "Data Types", correct: false },
+      { text: "Prototypes", correct: false },
+      { text: "Declaration Statements", correct: true },
+    ],
+  },
+  {
+    question:
+      "3) Which of the following variables takes precedence over the others if the names are the same?",
+    answers: [
+      { text: "Global Variable", correct: false },
+      { text: "Local Element", correct: true },
+      { text: "Both Of The Above", correct: false },
+      { text: "None Of The Above", correct: false },
+    ],
+  },
+  {
+    question: "4) In JavaScript the x===y statement implies that:",
+    answers: [
+      {
+        text: "Both x and y are equal in value, type and reference address as well.",
+        correct: false,
+      },
+      { text: "Both are x and y are equal in value only.", correct: false },
+      { text: "Both are not the same at all.", correct: false },
+      { text: "Both are equal in the value and data type.", correct: true },
+    ],
+  },
+  {
+    question:
+      "5) Which one of the following symbol is used for creating comments in the javascript:",
+    answers: [
+      { text: "\\", correct: false },
+      { text: "**", correct: false },
+      { text: "//", correct: true },
+      { text: "/", correct: false },
+    ],
+  },
+  {
+    question:
+      "6) A collection of elements of the same data type which may either in order or not, is called _____.",
+    answers: [
+      { text: "Array", correct: true },
+      { text: "String", correct: false },
+      { text: "Serialized Object", correct: false },
+      { text: "Parameter", correct: false },
+    ],
+  },
+];
 
-
-function selectAnswer();
-//
-// <div class="container" id="visible">
-// <h2>Do you want to begin?</h2>
-/* <p>Click below to start.</p>
-<button class="button" id="begin-button">Begin</button>
-</div>
-
-<!--Question1-->
-<div class="container" id="hidden">
-<h2>
-    1) Which of the following functions of an Array object joins all elements of an array into a string?
-</h2>
-<div id="answer-buttons">
-    <button class="button" id="incorrect">concat()</button>
-    <button class="button" id="correct">join()</button>
-    <button class="button" id="incorrect">pop()</button>
-    <button class="button" id="incorrect">map()</button>
-</div>
-</div>
-
-<!--Question2-->
-<div class="container" id="hidden">
-<h2>
-    2)The "function" and " var" are known as:
-</h2>
-<div id="answer-buttons">
-    <button class="button" id="incorrect">Keywords</button>
-    <button class="button" id="incorrect">Data Types</button>
-    <button class="button" id="incorrect">Prototypes</button>
-    <button class="button" id="correct">Declaration Statements</button>
-</div>
-</div>
-
-<!--Question3-->
-<div class="container" id="hidden">
-<h2>
-  3) Which of the following variables takes precedence over the others if the names are the same?
-</h2>
-<div id="answer-buttons">
-    <button class="button" id="incorrect">Global variable</button>
-    <button class="button" id="correct">Local Element</button>
-    <button class="button" id="incorrect">Both Of The Above</button>
-    <button class="button" id="incorrect">None Of The Above</button>
-</div>
-</div>
-
-<!--Question4-->
-<div class="container" id="hidden">
-<h2>
-  4) In JavaScript the x===y statement implies that:
-</h2>
-<div id="answer-buttons">
-    <button class="button" id="incorrect">Both x and y are equal in value, type and reference address as well.</button>
-    <button class="button" id="incorrect">Both are x and y are equal in value only.</button>
-    <button class="button" id="incorrect">Both are not the same at all.</button>
-    <button class="button" id="correct">Both are equal in the value and data type.</button>
-</div>
-</div>
-
-<!--Question5-->
-<div class="container" id="hidden">
-<h2>
-  5) Which one of the following symbol is used for creating comments in the javascript:
-</h2>
-<div id="answer-buttons">
-    <button class="button" id="incorrect">\\</button>
-    <button class="button" id="correct">//</button>
-    <button class="button" id="incorrect">\* *\</button>
-//     <button class="button" id="incorrect">\/</button>
-// </div>
-// </div>
-
-// <!--Question6-->
-// <div class="container" id="hidden">
-// <h2>
-//   6) A collection of elements of the same data type which may either in order or not, is called _____.
-// </h2>
-// <div id="answer-buttons">
-//     <button class="button" id="incorrect">String</button>
-//     <button class="button" id="incorrect">Serialized Object</button>
-//     <button class="button" id="incorrect">Parameter</button>
-//     <button class="button" id="correct">Array</button>
-// </div>
-// </div>
-// <!--Questions credited to https://www.tutorialspoint.com/javascript/javascript_online_quiz.htm; https://www.javatpoint.com/javascript-mcq-->;*/
+//Questions credited to: "https://www.tutorialspoint.com/javascript/javascript_online_quiz.htm; https://www.javatpoint.com/javascript-mcq"
