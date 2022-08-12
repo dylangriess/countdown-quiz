@@ -20,3 +20,13 @@ WHEN all questions are answered or the timer reaches 0
 THEN the game is over
 WHEN the game is over
 THEN I can save my initials and score
+
+here is question on page (variable, array)
+
+pick answer displayed and made into button
+
+carry button selected into answer variable
+
+another function to pick up string and compare it to current question's current answer
+
+q1.answer1

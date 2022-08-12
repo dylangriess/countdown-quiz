@@ -1,84 +1,114 @@
+var timeLeft = 60;
+var element = document.querySelector(".timeLeft");
+var secLeft = " seconds left.";
+var nextPage = document.querySelector(".timerStart");
+var index = 0;
+
 var startButton = document.getElementById("start-button");
+var nextButton = document.getElementById("next-button");
 var questionContainerElement = document.getElementById("question-container");
 
-startButton.addEventListener("click", startGame);
-
-function startGame() {
-  console.log("Started");
-  startButton.classList.add("hide");
-  questionContainerElement.classList.remove("hide");
-  setNextQuestion();
-  {
-    console.log(next);
-  }
-}
-
-function nextQuestion() {}
-
-function selectAnswer() {}
+//Buttons
+var option1 = document.getElementById("button1");
+var option2 = document.getElementById("button2");
+var option3 = document.getElementById("button3");
+var option4 = document.getElementById("button4");
 
 var questions = [
   {
-    question:
-      "1) Which of the following functions of an Array object joins all elements of an array into a string?",
-    answers: [
-      { text: "concat()", correct: false },
-      { text: "join()", correct: true },
-      { text: "pop()", correct: false },
-      { text: "map()", correct: false },
+    title:
+      "Which of the following functions of an Array object joins all elements of an array into a string?",
+    correctAnswer: "concat()",
+    choices: ["concat()", "join()", "pop()", "map()"],
+  },
+  {
+    title: "The function and var are known as:",
+    correctAnswer: "Declaration Statements",
+    choices: ["Keywords", "Data Types", "Prototypes", "Declaration Statements"],
+  },
+  {
+    title:
+      "Which of the following variables takes precedence over the others if the names are the same?",
+    correctAnswer: "Local Element",
+    choices: [
+      "Global Variable",
+      "Local Element",
+      "Both Of The Above",
+      "None Of The Above",
     ],
   },
   {
-    question: "2)The function and var are known as:",
-    answers: [
-      { text: "Keywords", correct: false },
-      { text: "Data Types", correct: false },
-      { text: "Prototypes", correct: false },
-      { text: "Declaration Statements", correct: true },
+    title: "In JavaScript the x===y statement implies that:",
+    correctAnswer: "Both are equal in the value and data type.",
+    choices: [
+      "Both x and y are equal in value, type and reference address as well.",
+      "Both are x and y are equal in value only.",
+      "Both are not the same at all.",
+      "Both are equal in the value and data type.",
     ],
   },
   {
-    question:
-      "3) Which of the following variables takes precedence over the others if the names are the same?",
-    answers: [
-      { text: "Global Variable", correct: false },
-      { text: "Local Element", correct: true },
-      { text: "Both Of The Above", correct: false },
-      { text: "None Of The Above", correct: false },
-    ],
+    title:
+      "Which one of the following symbol is used for creating comments in the javascript:",
+    correctAnswer: "//",
+    choices: ["&&", "**", "//", "||"],
   },
   {
-    question: "4) In JavaScript the x===y statement implies that:",
-    answers: [
-      {
-        text: "Both x and y are equal in value, type and reference address as well.",
-        correct: false,
-      },
-      { text: "Both are x and y are equal in value only.", correct: false },
-      { text: "Both are not the same at all.", correct: false },
-      { text: "Both are equal in the value and data type.", correct: true },
-    ],
-  },
-  {
-    question:
-      "5) Which one of the following symbol is used for creating comments in the javascript:",
-    answers: [
-      { text: "\\", correct: false },
-      { text: "**", correct: false },
-      { text: "//", correct: true },
-      { text: "/", correct: false },
-    ],
-  },
-  {
-    question:
-      "6) A collection of elements of the same data type which may either in order or not, is called _____.",
-    answers: [
-      { text: "Array", correct: true },
-      { text: "String", correct: false },
-      { text: "Serialized Object", correct: false },
-      { text: "Parameter", correct: false },
-    ],
+    title:
+      "A collection of elements of the same data type which may either in order or not, is called _____.",
+    correctAnswer: "Array",
+    choices: ["Array", "String", "Serialized Object", "Parameter"],
   },
 ];
+
+var question6 = {
+  question:
+    "A collection of elements of the same data type which may either in order or not, is called _____.",
+  answers1: "Array",
+  answers2: "String",
+  answers3: "Serialized Object",
+  answers4: "Parameter",
+
+  correct: "Array",
+};
+console.log(questions[0].title);
+
+//How Do I Click Start Button to Activate Question 1?
+var pEl = document.getElementById("q2");
+console.log(pEl);
+
+function startGame(event) {
+  console.log("Started");
+  //console logs question from array, need to present in buttons
+  pEl.textContent = questions[0].title;
+  startButton.setAttribute("style", "display: none");
+
+  var pEl = document.getElementById("q2");
+}
+
+startButton.addEventListener("click", startGame);
+
+//create buttons for choices
+
+//compare value of button to right/wrong answers
+//if else conditional statements - if it is the correct answer, use index,
+//event.target
+//for loops
+//timer interval
+//local storage
+
+nextButton.addEventListener("click", () => {
+  currentQuestionIndex++;
+  setNextQuestion();
+});
+
+//selected button is correct, set it to "correct" --> +1 to score in localStorage?
+function selectAnswer(e) {
+  var selectedButton = e.target;
+  var correct = selectedButton.dataset.correct;
+  setStatusClass(document.body, correct);
+}
+
+function nextQuestion() {}
 
 //Questions credited to: "https://www.tutorialspoint.com/javascript/javascript_online_quiz.htm; https://www.javatpoint.com/javascript-mcq"
