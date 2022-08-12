@@ -6,7 +6,7 @@ var index = 0;
 
 var startButton = document.getElementById("start-button");
 var nextButton = document.getElementById("next-button");
-var questionContainerElement = document.getElementById("question-container");
+var questionInfo = document.getElementById("questionInfo");
 
 //Buttons
 var option1 = document.getElementById("button1");
@@ -61,32 +61,49 @@ var questions = [
   },
 ];
 
-var question6 = {
-  question:
-    "A collection of elements of the same data type which may either in order or not, is called _____.",
-  answers1: "Array",
-  answers2: "String",
-  answers3: "Serialized Object",
-  answers4: "Parameter",
-
-  correct: "Array",
-};
-console.log(questions[0].title);
-
 //How Do I Click Start Button to Activate Question 1?
-var pEl = document.getElementById("q2");
-console.log(pEl);
+startButton.addEventListener("click", startGame);
 
 function startGame(event) {
   console.log("Started");
+  console.log(questions[0].title);
   //console logs question from array, need to present in buttons
-  pEl.textContent = questions[0].title;
   startButton.setAttribute("style", "display: none");
-
-  var pEl = document.getElementById("q2");
+  displayQuestions();
 }
 
-startButton.addEventListener("click", startGame);
+function displayQuestions() {
+  questionInfo.textContent = questions[index].title;
+
+  option1.textContent = questions[index].choices[0];
+  option2.textContent = questions[index].choices[1];
+  option3.textContent = questions[index].choices[2];
+  option4.textContent = questions[index].choices[3];
+}
+
+option1.addEventListener("click", checkAnswer);
+option2.addEventListener("click", checkAnswer);
+option3.addEventListener("click", checkAnswer);
+option4.addEventListener("click", checkAnswer);
+
+function checkAnswer(event) {
+  if (event.target.textContent === questions[index].correctAnswer) {
+    console.log("correct");
+    index++;
+    displayQuestions();
+    //********ERROR: UNABLE TO LOG LAST QUESTION
+  } else if (index === 6) {
+    console.log("done");
+    endGame();
+  } else {
+    timeLeft -= 5;
+    console.log("wrong");
+  }
+}
+
+function endGame() {
+  questionInfo.textContent = "";
+}
 
 //create buttons for choices
 
@@ -97,18 +114,6 @@ startButton.addEventListener("click", startGame);
 //timer interval
 //local storage
 
-nextButton.addEventListener("click", () => {
-  currentQuestionIndex++;
-  setNextQuestion();
-});
-
 //selected button is correct, set it to "correct" --> +1 to score in localStorage?
-function selectAnswer(e) {
-  var selectedButton = e.target;
-  var correct = selectedButton.dataset.correct;
-  setStatusClass(document.body, correct);
-}
-
-function nextQuestion() {}
 
 //Questions credited to: "https://www.tutorialspoint.com/javascript/javascript_online_quiz.htm; https://www.javatpoint.com/javascript-mcq"
