@@ -1,18 +1,32 @@
-var timeLeft = 60;
-var element = document.querySelector(".timeLeft");
+var secondsLeft = 60;
+var timerInterval = "";
+var timeEl = document.querySelector("#timer");
+var count;
+var element = document.querySelector(".secondsLeft");
 var secLeft = " seconds left.";
 var nextPage = document.querySelector(".timerStart");
 var index = 0;
+var initials = "";
+var leaderBoard = [];
+var score = secondsLeft;
 
 var startButton = document.getElementById("start-button");
-var nextButton = document.getElementById("next-button");
 var questionInfo = document.getElementById("questionInfo");
 
 //Buttons
+var answerButtons = document.getElementById("answer-buttons");
 var option1 = document.getElementById("button1");
 var option2 = document.getElementById("button2");
 var option3 = document.getElementById("button3");
 var option4 = document.getElementById("button4");
+
+var initialsInput = document.getElementById("initials");
+initialsInput.setAttribute("style", "display: none");
+
+var saveScore = document.getElementById("save-score");
+saveScore.setAttribute("style", "display: none");
+
+var endMessage = document.getElementById("final-score");
 
 var questions = [
   {
@@ -59,9 +73,11 @@ var questions = [
     correctAnswer: "Array",
     choices: ["Array", "String", "Serialized Object", "Parameter"],
   },
+  { title: "Quiz Complete!" },
 ];
 
 //How Do I Click Start Button to Activate Question 1?
+answerButtons.setAttribute("style", "display: none");
 startButton.addEventListener("click", startGame);
 
 function startGame(event) {
@@ -69,16 +85,39 @@ function startGame(event) {
   console.log(questions[0].title);
   //console logs question from array, need to present in buttons
   startButton.setAttribute("style", "display: none");
+  answerButtons.setAttribute("style", "display: grid");
+  setTime();
   displayQuestions();
 }
 
-function displayQuestions() {
-  questionInfo.textContent = questions[index].title;
+function setTime() {
+  // Sets interval in variable
+  var timerInterval = setInterval(function () {
+    timeEl.textContent = secondsLeft + " seconds left.";
+    secondsLeft--;
+    if (secondsLeft <= -1 || questions[index].title == "Quiz Complete!") {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      // Calls function to create and append image
+      endGame();
+    }
+  }, 1000);
+}
 
-  option1.textContent = questions[index].choices[0];
-  option2.textContent = questions[index].choices[1];
-  option3.textContent = questions[index].choices[2];
-  option4.textContent = questions[index].choices[3];
+function displayQuestions() {
+  //write if statement that checks to see questions[index].title === undefined, call end function
+  if (questions[index].title == "Quiz Complete!") {
+    console.log("done");
+    clearInterval(timerInterval);
+    endGame();
+  } else {
+    questionInfo.textContent = questions[index].title;
+
+    option1.textContent = questions[index].choices[0];
+    option2.textContent = questions[index].choices[1];
+    option3.textContent = questions[index].choices[2];
+    option4.textContent = questions[index].choices[3];
+  }
 }
 
 option1.addEventListener("click", checkAnswer);
@@ -91,18 +130,20 @@ function checkAnswer(event) {
     console.log("correct");
     index++;
     displayQuestions();
-    //********ERROR: UNABLE TO LOG LAST QUESTION
-  } else if (index === 6) {
-    console.log("done");
-    endGame();
   } else {
-    timeLeft -= 5;
+    secondsLeft -= 5;
     console.log("wrong");
   }
 }
 
 function endGame() {
   questionInfo.textContent = "";
+  saveScore.setAttribute("style", "display: visible");
+  initialsInput.setAttribute("style", "display: visible");
+  answerButtons.setAttribute("style", "display: none");
+  localStorage.setItem("highscore", score);
+  endMessage.textContent =
+    "Congrats on completing this quiz! Enter your initials to be posted on the leaderboard!";
 }
 
 //create buttons for choices

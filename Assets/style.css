@@ -3,11 +3,6 @@
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-:root {
-  --red: red;
-  --green: green;
-}
-
 body {
   padding: 0;
   margin: 0;
@@ -17,14 +12,6 @@ body {
   justify-content: center;
   align-items: center;
   background-color: lightgrey;
-}
-
-body.correct {
-  background-color: var(--green);
-}
-
-body.wrong {
-  background-color: var(--red);
 }
 
 .container {
@@ -39,6 +26,10 @@ body.wrong {
 
 #question {
   font-size: 2em;
+}
+
+#final-score {
+  color: rgb(156, 24, 213);
 }
 
 .button-grid {
@@ -64,14 +55,6 @@ body.wrong {
   border-color: black;
 }
 
-.button.wrong {
-  background-color: red;
-}
-
-.button.correct {
-  background-color: green;
-}
-
 .start-button {
   font-size: 2em;
   margin: 0px 15px 0px 15px;
@@ -83,7 +66,3 @@ body.wrong {
   justify-content: center;
   align-items: center;
 }
-
-/* .hide {
-  display: none;
-} */
