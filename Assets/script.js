@@ -161,15 +161,4 @@ function showLeaderboard() {
   }
 }
 
-//create buttons for choices
-
-//compare value of button to right/wrong answers
-//if else conditional statements - if it is the correct answer, use index,
-//event.target
-//for loops
-//timer interval
-//local storage
-
-//selected button is correct, set it to "correct" --> +1 to score in localStorage?
-
 //Questions credited to: "https://www.tutorialspoint.com/javascript/javascript_online_quiz.htm; https://www.javatpoint.com/javascript-mcq"
