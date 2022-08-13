@@ -7,11 +7,15 @@ var secLeft = " seconds left.";
 var nextPage = document.querySelector(".timerStart");
 var index = 0;
 var initials = "";
-var leaderBoard = [];
 var score = secondsLeft;
+var userName = 0;
+var users = [];
+
+var leaderboardList = document.getElementById("leaderboard");
+var leaderBoard = [];
 
 var startButton = document.getElementById("start-button");
-var questionInfo = document.getElementById("questionInfo");
+var questionInfo = document.getElementById("question-info");
 
 //Buttons
 var answerButtons = document.getElementById("answer-buttons");
@@ -19,14 +23,6 @@ var option1 = document.getElementById("button1");
 var option2 = document.getElementById("button2");
 var option3 = document.getElementById("button3");
 var option4 = document.getElementById("button4");
-
-var initialsInput = document.getElementById("initials");
-initialsInput.setAttribute("style", "display: none");
-
-var saveScore = document.getElementById("save-score");
-saveScore.setAttribute("style", "display: none");
-
-var endMessage = document.getElementById("final-score");
 
 var questions = [
   {
@@ -137,13 +133,32 @@ function checkAnswer(event) {
 }
 
 function endGame() {
-  questionInfo.textContent = "";
-  saveScore.setAttribute("style", "display: visible");
-  initialsInput.setAttribute("style", "display: visible");
   answerButtons.setAttribute("style", "display: none");
-  localStorage.setItem("highscore", score);
-  endMessage.textContent =
+  questionInfo.textContent =
     "Congrats on completing this quiz! Enter your initials to be posted on the leaderboard!";
+  enterScore();
+}
+
+function enterScore() {
+  var userName = window.prompt(
+    "Please enter your initals to record your score"
+  );
+  var userScore = secondsLeft + 1;
+
+  users.push([userName + ": your score is " + userScore]);
+
+  localStorage.setItem("Users", JSON.stringify(users));
+  showLeaderboard();
+}
+
+function showLeaderboard() {
+  for (var i = 0; i < users.length; i++) {
+    var user = users[i];
+
+    var li = document.createElement("li");
+    li.textContent = user;
+    leaderboardList.appendChild(li);
+  }
 }
 
 //create buttons for choices

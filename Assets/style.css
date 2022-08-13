@@ -24,12 +24,8 @@ body {
   box-shadow: 0 0 10px 5px;
 }
 
-#question {
+#question-info {
   font-size: 2em;
-}
-
-#final-score {
-  color: rgb(156, 24, 213);
 }
 
 .button-grid {
